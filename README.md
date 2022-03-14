@@ -37,6 +37,7 @@ php artisan migrate
 ```
 
 # گرفتن url جهت پرداخت
+```bash
 $pay = new Paymethods();
 $params = [
     'Api' => env('payApi'),
@@ -46,8 +47,10 @@ $params = [
 ];
 
 return $pay->getPayUrl($params);
-
+```
 # وریفای کردن پرداخت ها
+# توجه قبل از وریفای کردن مبلغ پرداختی را با مبلغ وریفای شونده مطابقت دهید
+```bash
 $pay = new Paymethods();
 $response = $pay->verifyPay($request, env('payApi'));
 $order = 
@@ -58,10 +61,13 @@ if ($response->getStatusCode() == 405) {
   //it is true
 }
 
+```
 در متد بالا اگر ریسپانس شما 405 باشد پرداخت با مشکل مواجه شده است در صورتی که 200 از ریسپانس برگشت داده شود یعنی وریفای انجام شده است.
 
 more methods:
+```bash
 1-getPayLinks($InvoiceNumber);
 2-getPayLinksWithPaginate($InvoiceNumber,$count);
 3-getPayVerify($InvoiceNumber);
 4-getPayVerifyWithPaginate($InvoiceNumber,$count);
+```
